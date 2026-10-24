@@ -488,7 +488,17 @@ function tiles(grid, say, next, data, mesa, walker){
 document.querySelectorAll("[data-n]").forEach(function(e){ e.textContent = CFG.nombre; });
 tiles($("#g1"), $("#s1"), $("#n1"), CFG.momentos, null, $("#paseo"));
 tiles($("#g2"), $("#s2"), $("#n2"), CFG.picnic, $("#mesa"));
-$("#abrir").onclick = function(){ audio(); musica(); go(1); };
+function pantallaCompleta(){
+  try{
+    var el = document.documentElement;
+    var rf = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+    if(rf && !(document.fullscreenElement || document.webkitFullscreenElement)){
+      var p = rf.call(el);
+      if(p && p.catch) p.catch(function(){});
+    }
+  }catch(e){}
+}
+$("#abrir").onclick = function(){ pantallaCompleta(); audio(); musica(); go(1); };
 $("#n1").onclick = function(){ go(2); };
 $("#n2").onclick = function(){ go(3); };
 $("#n3").onclick = function(){ go(7); };
